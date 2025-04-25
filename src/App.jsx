@@ -1,13 +1,7 @@
-import About from "./components/About";
-import Cards from "./components/Cards";
-import Eyes from "./components/Eyes";
 import StickyStackedCards from "./components/Feature";
-import Featured from "./components/Feature";
-import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 import Marque from "./components/Marque";
 import NavBar from "./components/Navbar";
-import ReadyTo from "./components/ReadyTo";
 import ServicesSection from "./components/Service";
 import TextPressure from "./components/TextPressure";
 
@@ -28,8 +22,7 @@ function App() {
       {/* <ReadyTo /> */}
 
 
-      <footer className="w-full sm:w-auto ">
-        <TextPressure
+      <TextPressure
           text="WEBDRAVE"
           fontFamily="Space Grotesk"
           flex={true}
@@ -42,7 +35,6 @@ function App() {
           minFontSize={48} // You can go higher if you want
           scale={true}
         />
-      </footer>
 
     </div>
   );
