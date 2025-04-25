@@ -22,9 +22,8 @@ function App() {
       {/* <ReadyTo /> */}
 
 
-      <TextPressure
+        <TextPressure
           text="WEBDRAVE"
-          fontFamily="Space Grotesk"
           flex={true}
           alpha={false}
           stroke={false}
@@ -32,8 +31,8 @@ function App() {
           weight={true}
           italic={true}
           textColor="#ffffff"
-          minFontSize={48} // You can go higher if you want
-          scale={true}
+          strokeColor="#ff0000"
+          minFontSize={36}
         />
 
     </div>

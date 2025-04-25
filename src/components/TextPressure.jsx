@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 const TextPressure = ({
   text = 'Compressa',
   fontFamily = 'Compressa VF',
+  // This font is just an example, you should not use it in commercial projects.
   fontUrl = 'https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2',
 
   width = true,
@@ -20,6 +21,7 @@ const TextPressure = ({
   className = '',
 
   minFontSize = 24,
+
 }) => {
   const containerRef = useRef(null);
   const titleRef = useRef(null);
@@ -45,14 +47,7 @@ const TextPressure = ({
       cursorRef.current.x = e.clientX;
       cursorRef.current.y = e.clientY;
     };
-
     const handleTouchMove = (e) => {
-      const t = e.touches[0];
-      cursorRef.current.x = t.clientX;
-      cursorRef.current.y = t.clientY;
-    };
-
-    const handleTouchStart = (e) => {
       const t = e.touches[0];
       cursorRef.current.x = t.clientX;
       cursorRef.current.y = t.clientY;
@@ -60,7 +55,6 @@ const TextPressure = ({
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: false });
 
     if (containerRef.current) {
       const { left, top, width, height } = containerRef.current.getBoundingClientRect();
@@ -73,7 +67,6 @@ const TextPressure = ({
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchstart', handleTouchStart);
     };
   }, []);
 
@@ -81,6 +74,7 @@ const TextPressure = ({
     if (!containerRef.current || !titleRef.current) return;
 
     const { width: containerW, height: containerH } = containerRef.current.getBoundingClientRect();
+
     let newFontSize = containerW / (chars.length / 2);
     newFontSize = Math.max(newFontSize, minFontSize);
 
@@ -152,14 +146,13 @@ const TextPressure = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full min-h-[200px] md:min-h-[300px] overflow-hidden bg-transparent"
+      className="relative w-full h-full overflow-hidden bg-transparent"
     >
       <style>{`
         @font-face {
           font-family: '${fontFamily}';
           src: url('${fontUrl}');
           font-style: normal;
-          font-display: swap;
         }
         .stroke span {
           position: relative;
@@ -175,18 +168,12 @@ const TextPressure = ({
           -webkit-text-stroke-width: ${strokeWidth}px;
           -webkit-text-stroke-color: ${strokeColor};
         }
-
-        /* Media query for mobile scaling */
-        @media (max-width: 768px) {
-          .text-pressure-title {
-            font-size: 24px; /* Adjust for mobile */
-          }
-        }
       `}</style>
 
       <h1
         ref={titleRef}
-        className={`text-pressure-title ${className} ${flex ? 'flex justify-between' : ''} ${stroke ? 'stroke' : ''} uppercase text-center`}
+        className={`text-pressure-title ${className} ${flex ? 'flex justify-between' : ''
+          } ${stroke ? 'stroke' : ''} uppercase text-center`}
         style={{
           fontFamily,
           fontSize: fontSize,
